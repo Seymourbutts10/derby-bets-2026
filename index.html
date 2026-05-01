@@ -298,11 +298,11 @@
   <div class="tabs">
     <div class="tab active" data-tab="oaks">
       Kentucky Oaks
-      <span class="when">Fri 8:40pm ET · 14 fillies</span>
+      <span class="when">Tonight 8:51pm ET · 14 fillies</span>
     </div>
     <div class="tab" data-tab="derby">
       Kentucky Derby
-      <span class="when">Sat 6:57pm ET · 20 horses</span>
+      <span class="when">Tomorrow 6:57pm ET · 20 horses</span>
     </div>
   </div>
 
@@ -317,64 +317,66 @@
 <script>
 // Baseline allocations (sum to ~$172.50). Scale linearly to user exposure.
 const OAKS = {
-  meta: '<strong>Pace read:</strong> Open contest, no clear pace meltdown. Five live winners. Prefer Percy\'s Bar (#9) at 6-1 — Ashland was the visually best Oaks prep this year.',
-  strategy: 'Top to bottom: <strong>Percy\'s Bar > Explora > Zany > Meaning > Always A Runner > Counting Stars > Prom Queen.</strong> Percy\'s Bar to win, key her over the other four favorites in exotics, sprinkle Always A Runner as the priced angle. Exclude horses 3, 6, 10, 11, 12, 13, 14.',
+  meta: '<strong>Pace read:</strong> Tote is telling — Percy\'s Bar (#11) is now the 4-1 favorite, Zany (#2) 9/2, Always A Runner (#9) bet down hard from 10-1 to 5-1, Lovely Grey (#15) hammered to 6-1. Open contest, no pace meltdown. Empty gates 6, 8, 12 (My Miss Mo, Bottle of Rouge, Bella Ballerina scratched).',
+  strategy: 'Top to bottom: <strong>Percy\'s Bar > Lovely Grey > Always A Runner > Explora > Zany > Prom Queen > Meaning > Counting Stars.</strong> Percy\'s Bar still primary even at 4-1 (Ashland was the best filly prep). Lovely Grey is the new live-money angle from a smaller barn — McCarthy stablemate of Meaning. Key Percy\'s Bar over the live group, with Lovely Grey woven through exotics. Throwouts: 3, 7, 13, 14, 16, 17.',
   groups: [
     {
       name: 'Win bets',
       bets: [
-        { type: 'WIN', cls: 'win', desc: 'Percy\'s Bar (#9)', detail: '6-1 · Colebrook / Machado · primary opinion', baseline: 15 },
-        { type: 'WIN', cls: 'win', desc: 'Always A Runner (#7)', detail: '10-1 · C. Brown / J. Ortiz · live value', baseline: 10 },
+        { type: 'WIN', cls: 'win', desc: 'Percy\'s Bar (#11)', detail: '4-1 · Colebrook / Machado · primary opinion', baseline: 14 },
+        { type: 'WIN', cls: 'win', desc: 'Lovely Grey (#15)', detail: '6-1 · Danner / D. Davis · live tote money', baseline: 6 },
+        { type: 'WIN', cls: 'win', desc: 'Always A Runner (#9)', detail: '5-1 · C. Brown / J. Ortiz · scaled down (shortened)', baseline: 6 },
       ]
     },
     {
       name: 'Exactas',
       bets: [
-        { type: 'EXACTA KEY', cls: 'exa', desc: '9 OVER 1, 2, 5, 7', detail: '4 combos × $3 base · Percy\'s Bar wins, sensible 2nd', baseline: 12, unit: 3, combos: 4 },
-        { type: 'EXACTA KEY', cls: 'exa', desc: '1, 2, 5 OVER 9', detail: '3 combos × $1 base · insurance if Explora/Zany/Meaning beat her', baseline: 3, unit: 1, combos: 3 },
+        { type: 'EXACTA KEY', cls: 'exa', desc: '11 OVER 1, 2, 9, 10, 15', detail: '5 combos × $2 base · Percy\'s Bar wins, sensible 2nd', baseline: 10, unit: 2, combos: 5 },
+        { type: 'EXACTA KEY', cls: 'exa', desc: '1, 2, 9, 15 OVER 11', detail: '4 combos × $1 base · insurance if a live one beats her', baseline: 4, unit: 1, combos: 4 },
       ]
     },
     {
       name: 'Trifectas',
       bets: [
-        { type: 'TRIFECTA KEY', cls: 'tri', desc: '9 / 1, 2, 5, 7 / 1, 2, 4, 5, 7, 8', detail: '20 combos × $0.50 base · Percy\'s Bar wins', baseline: 10, unit: 0.50, combos: 20 },
-        { type: 'TRIFECTA KEY', cls: 'tri', desc: '1, 2, 5 / 9 / 1, 2, 4, 5, 7, 8', detail: '15 combos × $0.50 base · Percy\'s Bar 2nd', baseline: 7.50, unit: 0.50, combos: 15 },
+        { type: 'TRIFECTA KEY', cls: 'tri', desc: '11 / 1, 2, 9, 10, 15 / 1, 2, 4, 9, 10, 15', detail: '25 combos × $0.50 base · Percy\'s Bar wins', baseline: 12.50, unit: 0.50, combos: 25 },
+        { type: 'TRIFECTA KEY', cls: 'tri', desc: '1, 2, 9, 15 / 11 / 1, 2, 4, 9, 10, 15', detail: '20 combos × $0.25 base · Percy\'s Bar 2nd', baseline: 5, unit: 0.25, combos: 20 },
       ]
     },
   ],
 };
 
 const DERBY = {
-  meta: '<strong>Pace read:</strong> Six Speed (#16) and Pavlovian (#15) both committed to the lead. Renegade (#1) forced forward from the rail. Expect a contested 45.6–46.0 half. <strong>Stalker / closer setup.</strong>',
-  strategy: 'Top to bottom: <strong>Further Ado > Chief Wallabee > Commandment > The Puma > Emerging Market > Golden Tempo > Renegade.</strong> Fade Renegade as a singular play (post 1, hoof issues, Pletcher 2-65). Key #17 and #12 through stalker-friendly exotics. Golden Tempo (#18) is the priced bomb if pace truly cooks.',
+  meta: '<strong>Pace read:</strong> After scratches (Right To Party, Silent Tactic, Fulleffort), gates 5, 13, 18 are empty. Six Speed (#17) and Pavlovian (#16) both wide and committed to the lead; Renegade (#1) forced forward from the rail. Expect a contested 45.6–46.0 half. <strong>Stalker / closer setup.</strong>',
+  strategy: 'Top to bottom: <strong>Further Ado > Commandment > Chief Wallabee > The Puma > So Happy > Emerging Market > Golden Tempo > Renegade.</strong> Cox barn doubles up — Further Ado (#18) and Commandment (#6) are both 7/1 stalkers and the strongest two opinions. Chief Wallabee (#12) drifted to 12/1 — fair value. Fade Renegade (#1) as a singular play (post 1, hoof issues, Pletcher 2-65). Golden Tempo (#19) at 36/1 is the priced bomb if pace truly cooks.',
   groups: [
     {
       name: 'Win / Place',
       bets: [
-        { type: 'WIN', cls: 'win', desc: 'Further Ado (#17)', detail: '6-1 · Lynch / Velazquez · Blue Grass winner · primary', baseline: 20 },
-        { type: 'PLACE', cls: 'place', desc: 'Further Ado (#17)', detail: 'Insurance second-place hit', baseline: 10 },
-        { type: 'WIN', cls: 'win', desc: 'Chief Wallabee (#12)', detail: '8-1 · B. Mott / Alvarado · co-primary', baseline: 10 },
-        { type: 'WIN', cls: 'win', desc: 'Golden Tempo (#18)', detail: '30-1 · DeVaux / J. Ortiz · live closer', baseline: 5 },
+        { type: 'WIN', cls: 'win', desc: 'Further Ado (#18)', detail: '7/1 · Cox / Velazquez · Blue Grass winner · primary', baseline: 18 },
+        { type: 'PLACE', cls: 'place', desc: 'Further Ado (#18)', detail: 'Insurance second-place hit', baseline: 6 },
+        { type: 'WIN', cls: 'win', desc: 'Commandment (#6)', detail: '7/1 · Cox / Saez · Cox stablemate · co-primary', baseline: 8 },
+        { type: 'WIN', cls: 'win', desc: 'Chief Wallabee (#12)', detail: '12/1 · B. Mott / Alvarado · drifted to value', baseline: 9 },
+        { type: 'WIN', cls: 'win', desc: 'Golden Tempo (#19)', detail: '36/1 · DeVaux / J. Ortiz · live closer bomb', baseline: 4 },
       ]
     },
     {
       name: 'Exactas',
       bets: [
-        { type: 'EXACTA BOX', cls: 'exa', desc: '12, 17', detail: '2 combos × $1 base · the two best fits', baseline: 2, unit: 1, combos: 2 },
-        { type: 'EXACTA KEY', cls: 'exa', desc: '17 OVER 6, 9, 12, 14, 18', detail: '5 combos × $2 base', baseline: 10, unit: 2, combos: 5 },
-        { type: 'EXACTA KEY', cls: 'exa', desc: '12 OVER 6, 9, 14, 17, 18', detail: '5 combos × $2 base', baseline: 10, unit: 2, combos: 5 },
-        { type: 'EXACTA KEY', cls: 'exa', desc: '18 OVER 6, 9, 12, 14, 17', detail: '5 combos × $1 base · closer wins', baseline: 5, unit: 1, combos: 5 },
-        { type: 'EXACTA KEY', cls: 'exa', desc: '6, 9, 12, 14, 17 OVER 18', detail: '5 combos × $1 base · closer noses 2nd', baseline: 5, unit: 1, combos: 5 },
-        { type: 'EXACTA KEY', cls: 'exa', desc: '1 OVER 12, 17', detail: '2 combos × $2 base · Renegade gate-to-wire insurance', baseline: 4, unit: 2, combos: 2 },
-        { type: 'EXACTA KEY', cls: 'exa', desc: '12, 17 OVER 1', detail: '2 combos × $2 base · Renegade tires to 2nd', baseline: 4, unit: 2, combos: 2 },
+        { type: 'EXACTA BOX', cls: 'exa', desc: '12, 18', detail: '2 combos × $1 base · the two best fits', baseline: 2, unit: 1, combos: 2 },
+        { type: 'EXACTA KEY', cls: 'exa', desc: '18 OVER 6, 8, 9, 12, 15, 19', detail: '6 combos × $2 base · Further Ado wins', baseline: 12, unit: 2, combos: 6 },
+        { type: 'EXACTA KEY', cls: 'exa', desc: '12 OVER 6, 8, 9, 15, 18, 19', detail: '6 combos × $2 base · Chief Wallabee wins', baseline: 12, unit: 2, combos: 6 },
+        { type: 'EXACTA KEY', cls: 'exa', desc: '19 OVER 6, 12, 18', detail: '3 combos × $1 base · closer wins', baseline: 3, unit: 1, combos: 3 },
+        { type: 'EXACTA KEY', cls: 'exa', desc: '6, 12, 18 OVER 19', detail: '3 combos × $1 base · closer noses 2nd', baseline: 3, unit: 1, combos: 3 },
+        { type: 'EXACTA KEY', cls: 'exa', desc: '1 OVER 12, 18', detail: '2 combos × $2 base · Renegade gate-to-wire insurance', baseline: 4, unit: 2, combos: 2 },
+        { type: 'EXACTA KEY', cls: 'exa', desc: '12, 18 OVER 1', detail: '2 combos × $2 base · Renegade tires to 2nd', baseline: 4, unit: 2, combos: 2 },
       ]
     },
     {
       name: 'Trifectas',
       bets: [
-        { type: 'TRIFECTA KEY', cls: 'tri', desc: '17 / 6, 9, 12, 14, 18 / 1, 6, 9, 12, 14, 18', detail: '25 combos × $0.50 base · Further Ado wins', baseline: 12.50, unit: 0.50, combos: 25 },
-        { type: 'TRIFECTA KEY', cls: 'tri', desc: '12 / 6, 9, 14, 17, 18 / 1, 6, 9, 14, 17, 18', detail: '25 combos × $0.50 base · Chief Wallabee wins', baseline: 12.50, unit: 0.50, combos: 25 },
-        { type: 'TRIFECTA KEY', cls: 'tri', desc: '18 / 12, 17 / 1, 6, 9, 12, 14, 17', detail: '10 combos × $0.50 base · longshot bomb', baseline: 5, unit: 0.50, combos: 10 },
+        { type: 'TRIFECTA KEY', cls: 'tri', desc: '18 / 6, 8, 9, 12 / 1, 6, 8, 9, 12, 15, 19', detail: '24 combos × $0.50 base · Further Ado wins', baseline: 12, unit: 0.50, combos: 24 },
+        { type: 'TRIFECTA KEY', cls: 'tri', desc: '12 / 6, 8, 9, 18 / 1, 6, 8, 9, 15, 18, 19', detail: '24 combos × $0.50 base · Chief Wallabee wins', baseline: 12, unit: 0.50, combos: 24 },
+        { type: 'TRIFECTA KEY', cls: 'tri', desc: '19 / 12, 18 / 1, 6, 8, 9, 12, 15, 18', detail: '12 combos × $0.50 base · longshot bomb', baseline: 6, unit: 0.50, combos: 12 },
       ]
     },
   ],
