@@ -462,7 +462,7 @@ document.querySelectorAll('.tab').forEach(tab => {
 
 // Exposure input + quick buttons
 const expInput = document.getElementById('exposure');
-expInput.addEventListener('input', renderAll);
+expInput.addEventListener('input', renderActive);
 document.querySelectorAll('.quick').forEach(btn => {
   btn.addEventListener('click', () => {
     expInput.value = btn.dataset.amt;
