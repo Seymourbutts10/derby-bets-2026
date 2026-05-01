@@ -281,17 +281,17 @@
   </header>
 
   <div class="exposure">
-    <label>Total Exposure (Oaks + Derby)</label>
+    <label><span id="exposure-label">Exposure for Kentucky Oaks</span></label>
     <div class="input-row">
       <span class="dollar">$</span>
-      <input type="number" id="exposure" value="200" min="20" step="10" inputmode="decimal" />
+      <input type="number" id="exposure" value="100" min="10" step="10" inputmode="decimal" />
     </div>
     <div class="quick-row">
+      <button class="quick" data-amt="25">$25</button>
       <button class="quick" data-amt="50">$50</button>
       <button class="quick" data-amt="100">$100</button>
-      <button class="quick" data-amt="200">$200</button>
+      <button class="quick" data-amt="250">$250</button>
       <button class="quick" data-amt="500">$500</button>
-      <button class="quick" data-amt="1000">$1k</button>
     </div>
   </div>
 
@@ -380,7 +380,9 @@ const DERBY = {
   ],
 };
 
-const BASELINE_TOTAL = 172.50;
+const OAKS_BASELINE = 57.50;
+const DERBY_BASELINE = 115.00;
+let activeTab = 'oaks';
 
 function fmt(n) {
   if (n >= 100) return '$' + Math.round(n).toLocaleString();
@@ -388,10 +390,10 @@ function fmt(n) {
   return '$' + n.toFixed(2);
 }
 
-function renderRace(race, paneId) {
+function renderRace(race, paneId, baseline) {
   const pane = document.getElementById(paneId);
   const exposure = parseFloat(document.getElementById('exposure').value) || 0;
-  const scale = exposure / BASELINE_TOTAL;
+  const scale = exposure / baseline;
 
   let raceTotal = 0;
   let html = '';
@@ -424,8 +426,8 @@ function renderRace(race, paneId) {
 
   html += `
     <div class="totals">
-      <div class="item"><div class="label">This Race</div><div class="val accent">${fmt(raceTotal)}</div></div>
-      <div class="item"><div class="label">Total</div><div class="val">${fmt(exposure)}</div></div>
+      <div class="item"><div class="label">Race Total</div><div class="val accent">${fmt(raceTotal)}</div></div>
+      <div class="item"><div class="label">Target</div><div class="val">${fmt(exposure)}</div></div>
       <div class="item"><div class="label">Bets</div><div class="val">${race.groups.reduce((s, g) => s + g.bets.length, 0)}</div></div>
     </div>
     <details><summary>Strategy notes</summary><div class="strategy">${race.strategy}</div></details>
@@ -434,9 +436,15 @@ function renderRace(race, paneId) {
   pane.innerHTML = html;
 }
 
-function renderAll() {
-  renderRace(OAKS, 'oaks-pane');
-  renderRace(DERBY, 'derby-pane');
+function renderActive() {
+  const label = document.getElementById('exposure-label');
+  if (activeTab === 'oaks') {
+    label.textContent = 'Exposure for Kentucky Oaks';
+    renderRace(OAKS, 'oaks-pane', OAKS_BASELINE);
+  } else {
+    label.textContent = 'Exposure for Kentucky Derby';
+    renderRace(DERBY, 'derby-pane', DERBY_BASELINE);
+  }
 }
 
 // Tab handling
@@ -444,9 +452,10 @@ document.querySelectorAll('.tab').forEach(tab => {
   tab.addEventListener('click', () => {
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
     tab.classList.add('active');
-    const which = tab.dataset.tab;
-    document.getElementById('oaks-pane').style.display = which === 'oaks' ? '' : 'none';
-    document.getElementById('derby-pane').style.display = which === 'derby' ? '' : 'none';
+    activeTab = tab.dataset.tab;
+    document.getElementById('oaks-pane').style.display = activeTab === 'oaks' ? '' : 'none';
+    document.getElementById('derby-pane').style.display = activeTab === 'derby' ? '' : 'none';
+    renderActive();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 });
@@ -457,11 +466,11 @@ expInput.addEventListener('input', renderAll);
 document.querySelectorAll('.quick').forEach(btn => {
   btn.addEventListener('click', () => {
     expInput.value = btn.dataset.amt;
-    renderAll();
+    renderActive();
   });
 });
 
-renderAll();
+renderActive();
 </script>
 </body>
 </html>
