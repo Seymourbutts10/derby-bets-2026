@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#0a0e14" />
+<title>Oaks & Derby 2026 — Bet Builder</title>
+<style>
+  :root {
+    --bg: #0a0e14;
+    --panel: #131922;
+    --panel-2: #1a212d;
+    --border: #232c3a;
+    --text: #e8edf2;
+    --muted: #8a96a8;
+    --accent: #d4af37;
+    --accent-dim: #8a7320;
+    --rose: #c8133a;
+    --green: #2ecc71;
+    --blue: #4ea3ff;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-size: 16px;
+    line-height: 1.4;
+  }
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 16px 14px max(env(safe-area-inset-bottom), 24px);
+  }
+  header {
+    text-align: center;
+    padding: 8px 0 16px;
+  }
+  h1 {
+    font-size: 22px;
+    margin: 0 0 4px;
+    letter-spacing: 0.5px;
+  }
+  h1 .accent { color: var(--accent); }
+  .sub {
+    font-size: 12px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+  .exposure {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 14px;
+    margin-bottom: 14px;
+  }
+  .exposure label {
+    display: block;
+    font-size: 12px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin-bottom: 8px;
+  }
+  .input-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .dollar {
+    font-size: 28px;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  input[type="number"] {
+    flex: 1;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 28px;
+    font-weight: 600;
+    padding: 10px 12px;
+    border-radius: 10px;
+    width: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  input[type="number"]:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+  .quick-row {
+    display: flex;
+    gap: 6px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+  .quick {
+    flex: 1;
+    min-width: 60px;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 9px 0;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.15s;
+  }
+  .quick:hover, .quick:active { border-color: var(--accent); color: var(--accent); }
+  .tabs {
+    display: flex;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 4px;
+    margin-bottom: 14px;
+    gap: 4px;
+  }
+  .tab {
+    flex: 1;
+    text-align: center;
+    padding: 12px 8px;
+    border-radius: 9px;
+    cursor: pointer;
+    color: var(--muted);
+    font-weight: 600;
+    font-size: 14px;
+    transition: 0.15s;
+    user-select: none;
+  }
+  .tab.active {
+    background: var(--rose);
+    color: white;
+  }
+  .tab .when {
+    display: block;
+    font-size: 10px;
+    font-weight: 400;
+    opacity: 0.85;
+    margin-top: 2px;
+    letter-spacing: 0.5px;
+  }
+  .race-meta {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 14px;
+    margin-bottom: 14px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .race-meta strong { color: var(--text); }
+  .totals {
+    background: linear-gradient(135deg, var(--panel) 0%, var(--panel-2) 100%);
+    border: 1px solid var(--accent-dim);
+    border-radius: 14px;
+    padding: 14px;
+    margin-bottom: 14px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+    text-align: center;
+  }
+  .totals .item .label {
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .totals .item .val {
+    font-size: 18px;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+  .totals .item .val.accent { color: var(--accent); }
+  .group {
+    margin-bottom: 16px;
+  }
+  .group-title {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 0 4px 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .group-title .total { color: var(--accent); font-weight: 700; }
+  .bet {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+  .bet-info { flex: 1; min-width: 0; }
+  .bet-type {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: var(--panel-2);
+    color: var(--blue);
+    margin-bottom: 4px;
+    text-transform: uppercase;
+  }
+  .bet-type.win { color: var(--green); }
+  .bet-type.place { color: var(--accent); }
+  .bet-type.exa { color: var(--blue); }
+  .bet-type.tri { color: #c994ff; }
+  .bet-desc {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 2px;
+    word-break: break-word;
+  }
+  .bet-detail {
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .bet-amount {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+  .strategy {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px;
+    margin-bottom: 14px;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+  .strategy strong { color: var(--text); }
+  details summary {
+    cursor: pointer;
+    color: var(--accent);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 4px 0;
+  }
+  details summary::marker, details summary::-webkit-details-marker { display: none; }
+  details summary::after { content: " ▸"; }
+  details[open] summary::after { content: " ▾"; }
+  details > div { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); }
+  .footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 11px;
+    padding: 16px 0 8px;
+    line-height: 1.6;
+  }
+  @media (max-width: 380px) {
+    .quick { font-size: 13px; padding: 8px 0; }
+    .bet-amount { font-size: 16px; }
+    .totals .item .val { font-size: 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>Oaks <span class="accent">×</span> Derby <span class="accent">2026</span></h1>
+    <div class="sub">Bet Builder</div>
+  </header>
+
+  <div class="exposure">
+    <label>Total Exposure (Oaks + Derby)</label>
+    <div class="input-row">
+      <span class="dollar">$</span>
+      <input type="number" id="exposure" value="200" min="20" step="10" inputmode="decimal" />
+    </div>
+    <div class="quick-row">
+      <button class="quick" data-amt="50">$50</button>
+      <button class="quick" data-amt="100">$100</button>
+      <button class="quick" data-amt="200">$200</button>
+      <button class="quick" data-amt="500">$500</button>
+      <button class="quick" data-amt="1000">$1k</button>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <div class="tab active" data-tab="oaks">
+      Kentucky Oaks
+      <span class="when">Fri 8:40pm ET · 14 fillies</span>
+    </div>
+    <div class="tab" data-tab="derby">
+      Kentucky Derby
+      <span class="when">Sat 6:57pm ET · 20 horses</span>
+    </div>
+  </div>
+
+  <div id="oaks-pane"></div>
+  <div id="derby-pane" style="display:none"></div>
+
+  <div class="footer">
+    Bet a fixed-stake unit close to the strategy weights. Watch live tote odds — if a key horse drifts, lean win bets up; if it shortens, shift weight to exotics. No em dashes were harmed in the making of this page.
+  </div>
+</div>
+
+<script>
+// Baseline allocations (sum to ~$172.50). Scale linearly to user exposure.
+const OAKS = {
+  meta: '<strong>Pace read:</strong> Open contest, no clear pace meltdown. Five live winners. Prefer Percy\'s Bar (#9) at 6-1 — Ashland was the visually best Oaks prep this year.',
+  strategy: 'Top to bottom: <strong>Percy\'s Bar > Explora > Zany > Meaning > Always A Runner > Counting Stars > Prom Queen.</strong> Percy\'s Bar to win, key her over the other four favorites in exotics, sprinkle Always A Runner as the priced angle. Exclude horses 3, 6, 10, 11, 12, 13, 14.',
+  groups: [
+    {
+      name: 'Win bets',
+      bets: [
+        { type: 'WIN', cls: 'win', desc: 'Percy\'s Bar (#9)', detail: '6-1 · Colebrook / Machado · primary opinion', baseline: 15 },
+        { type: 'WIN', cls: 'win', desc: 'Always A Runner (#7)', detail: '10-1 · C. Brown / J. Ortiz · live value', baseline: 10 },
+      ]
+    },
+    {
+      name: 'Exactas',
+      bets: [
+        { type: 'EXACTA KEY', cls: 'exa', desc: '9 OVER 1, 2, 5, 7', detail: '4 combos × $3 base · Percy\'s Bar wins, sensible 2nd', baseline: 12, unit: 3, combos: 4 },
+        { type: 'EXACTA KEY', cls: 'exa', desc: '1, 2, 5 OVER 9', detail: '3 combos × $1 base · insurance if Explora/Zany/Meaning beat her', baseline: 3, unit: 1, combos: 3 },
+      ]
+    },
+    {
+      name: 'Trifectas',
+      bets: [
+        { type: 'TRIFECTA KEY', cls: 'tri', desc: '9 / 1, 2, 5, 7 / 1, 2, 4, 5, 7, 8', detail: '20 combos × $0.50 base · Percy\'s Bar wins', baseline: 10, unit: 0.50, combos: 20 },
+        { type: 'TRIFECTA KEY', cls: 'tri', desc: '1, 2, 5 / 9 / 1, 2, 4, 5, 7, 8', detail: '15 combos × $0.50 base · Percy\'s Bar 2nd', baseline: 7.50, unit: 0.50, combos: 15 },
+      ]
+    },
+  ],
+};
+
+const DERBY = {
+  meta: '<strong>Pace read:</strong> Six Speed (#16) and Pavlovian (#15) both committed to the lead. Renegade (#1) forced forward from the rail. Expect a contested 45.6–46.0 half. <strong>Stalker / closer setup.</strong>',
+  strategy: 'Top to bottom: <strong>Further Ado > Chief Wallabee > Commandment > The Puma > Emerging Market > Golden Tempo > Renegade.</strong> Fade Renegade as a singular play (post 1, hoof issues, Pletcher 2-65). Key #17 and #12 through stalker-friendly exotics. Golden Tempo (#18) is the priced bomb if pace truly cooks.',
+  groups: [
+    {
+      name: 'Win / Place',
+      bets: [
+        { type: 'WIN', cls: 'win', desc: 'Further Ado (#17)', detail: '6-1 · Lynch / Velazquez · Blue Grass winner · primary', baseline: 20 },
+        { type: 'PLACE', cls: 'place', desc: 'Further Ado (#17)', detail: 'Insurance second-place hit', baseline: 10 },
+        { type: 'WIN', cls: 'win', desc: 'Chief Wallabee (#12)', detail: '8-1 · B. Mott / Alvarado · co-primary', baseline: 10 },
+        { type: 'WIN', cls: 'win', desc: 'Golden Tempo (#18)', detail: '30-1 · DeVaux / J. Ortiz · live closer', baseline: 5 },
+      ]
+    },
+    {
+      name: 'Exactas',
+      bets: [
+        { type: 'EXACTA BOX', cls: 'exa', desc: '12, 17', detail: '2 combos × $1 base · the two best fits', baseline: 2, unit: 1, combos: 2 },
+        { type: 'EXACTA KEY', cls: 'exa', desc: '17 OVER 6, 9, 12, 14, 18', detail: '5 combos × $2 base', baseline: 10, unit: 2, combos: 5 },
+        { type: 'EXACTA KEY', cls: 'exa', desc: '12 OVER 6, 9, 14, 17, 18', detail: '5 combos × $2 base', baseline: 10, unit: 2, combos: 5 },
+        { type: 'EXACTA KEY', cls: 'exa', desc: '18 OVER 6, 9, 12, 14, 17', detail: '5 combos × $1 base · closer wins', baseline: 5, unit: 1, combos: 5 },
+        { type: 'EXACTA KEY', cls: 'exa', desc: '6, 9, 12, 14, 17 OVER 18', detail: '5 combos × $1 base · closer noses 2nd', baseline: 5, unit: 1, combos: 5 },
+        { type: 'EXACTA KEY', cls: 'exa', desc: '1 OVER 12, 17', detail: '2 combos × $2 base · Renegade gate-to-wire insurance', baseline: 4, unit: 2, combos: 2 },
+        { type: 'EXACTA KEY', cls: 'exa', desc: '12, 17 OVER 1', detail: '2 combos × $2 base · Renegade tires to 2nd', baseline: 4, unit: 2, combos: 2 },
+      ]
+    },
+    {
+      name: 'Trifectas',
+      bets: [
+        { type: 'TRIFECTA KEY', cls: 'tri', desc: '17 / 6, 9, 12, 14, 18 / 1, 6, 9, 12, 14, 18', detail: '25 combos × $0.50 base · Further Ado wins', baseline: 12.50, unit: 0.50, combos: 25 },
+        { type: 'TRIFECTA KEY', cls: 'tri', desc: '12 / 6, 9, 14, 17, 18 / 1, 6, 9, 14, 17, 18', detail: '25 combos × $0.50 base · Chief Wallabee wins', baseline: 12.50, unit: 0.50, combos: 25 },
+        { type: 'TRIFECTA KEY', cls: 'tri', desc: '18 / 12, 17 / 1, 6, 9, 12, 14, 17', detail: '10 combos × $0.50 base · longshot bomb', baseline: 5, unit: 0.50, combos: 10 },
+      ]
+    },
+  ],
+};
+
+const BASELINE_TOTAL = 172.50;
+
+function fmt(n) {
+  if (n >= 100) return '$' + Math.round(n).toLocaleString();
+  if (n >= 10) return '$' + n.toFixed(0);
+  return '$' + n.toFixed(2);
+}
+
+function renderRace(race, paneId) {
+  const pane = document.getElementById(paneId);
+  const exposure = parseFloat(document.getElementById('exposure').value) || 0;
+  const scale = exposure / BASELINE_TOTAL;
+
+  let raceTotal = 0;
+  let html = '';
+  html += `<div class="race-meta">${race.meta}</div>`;
+
+  const groupHtmls = [];
+  race.groups.forEach(group => {
+    let groupTotal = 0;
+    let bets = '';
+    group.bets.forEach(bet => {
+      const amt = bet.baseline * scale;
+      groupTotal += amt;
+      bets += `
+        <div class="bet">
+          <div class="bet-info">
+            <span class="bet-type ${bet.cls}">${bet.type}</span>
+            <div class="bet-desc">${bet.desc}</div>
+            <div class="bet-detail">${bet.detail}</div>
+          </div>
+          <div class="bet-amount">${fmt(amt)}</div>
+        </div>`;
+    });
+    raceTotal += groupTotal;
+    groupHtmls.push(`
+      <div class="group">
+        <div class="group-title"><span>${group.name}</span><span class="total">${fmt(groupTotal)}</span></div>
+        ${bets}
+      </div>`);
+  });
+
+  html += `
+    <div class="totals">
+      <div class="item"><div class="label">This Race</div><div class="val accent">${fmt(raceTotal)}</div></div>
+      <div class="item"><div class="label">Total</div><div class="val">${fmt(exposure)}</div></div>
+      <div class="item"><div class="label">Bets</div><div class="val">${race.groups.reduce((s, g) => s + g.bets.length, 0)}</div></div>
+    </div>
+    <details><summary>Strategy notes</summary><div class="strategy">${race.strategy}</div></details>
+  `;
+  html += groupHtmls.join('');
+  pane.innerHTML = html;
+}
+
+function renderAll() {
+  renderRace(OAKS, 'oaks-pane');
+  renderRace(DERBY, 'derby-pane');
+}
+
+// Tab handling
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    const which = tab.dataset.tab;
+    document.getElementById('oaks-pane').style.display = which === 'oaks' ? '' : 'none';
+    document.getElementById('derby-pane').style.display = which === 'derby' ? '' : 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
+
+// Exposure input + quick buttons
+const expInput = document.getElementById('exposure');
+expInput.addEventListener('input', renderAll);
+document.querySelectorAll('.quick').forEach(btn => {
+  btn.addEventListener('click', () => {
+    expInput.value = btn.dataset.amt;
+    renderAll();
+  });
+});
+
+renderAll();
+</script>
+</body>
+</html>
