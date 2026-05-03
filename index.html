@@ -346,37 +346,38 @@ const OAKS = {
 };
 
 const DERBY = {
-  meta: '<strong>Pace read:</strong> <strong>The Puma (#9) scratched this morning</strong> — leg swelling. Field down to 19. Empty gates 5, 9, 13, 20 (Right To Party, The Puma, Silent Tactic, Fulleffort). Six Speed (#17) and Pavlovian (#16) wide and committed to the lead; Renegade (#1) forced forward from the rail. Expect a contested 45.6–46.0 half. <strong>Stalker / closer setup.</strong>',
-  strategy: 'Top to bottom: <strong>Further Ado > Commandment > Chief Wallabee > So Happy > Emerging Market > Golden Tempo > Renegade.</strong> The Puma scratch removes one of the four 7-8/1 co-favorites — money should redistribute to So Happy, Commandment and Further Ado. Cox barn doubles up: Further Ado (#18) and Commandment (#6), both 7/1 stalkers, are the strongest two opinions. Chief Wallabee (#12) drifted to 9-12/1 — best Mott in the field. Fade Renegade (#1) as a singular play. Golden Tempo (#19) at 36/1 is the priced bomb if pace cooks.',
+  meta: '<strong>Pace read · WET TRACK:</strong> Rain at the Downs — strip going off-track. Speed/pace types last better in slop, closers struggle through the kickback. Live tote shifting: Commandment (#6) 5/1, So Happy (#8) 5/1, Renegade (#1) drifted to 6/1, Chief Wallabee (#12) 6/1, Further Ado (#18) 6/1, Emerging Market (#15) 9/1. Empty gates 5, 9, 13, 20.',
+  strategy: 'Top to bottom (rain-adjusted): <strong>Further Ado > Commandment > So Happy > Danon Bourbon > Chief Wallabee > Golden Tempo > Renegade.</strong> Rain shakes the board: <strong>Danon Bourbon (#7) at 14/1</strong> is the new live mud play — 2-for-2 on slop in Japan, sire Maxfield 27% wet, Tomlinson topping the field. Cox barn (Further Ado / Commandment) still the spine. Chief Wallabee is the loser of the rain — limited mud pedigree, position trimmed. Renegade (#1) fade is softer now: Into Mischief sired Sovereignty\'s 2025 slop win, and front-runners hold up better in slop. Pavlovian (#16) and Six Speed (#17) speed angles get a small assist from the wet.',
   groups: [
     {
       name: 'Win / Place',
       bets: [
-        { type: 'WIN', cls: 'win', desc: 'Further Ado (#18)', detail: '7/1 · Cox / Velazquez · Blue Grass winner · primary', baseline: 22 },
-        { type: 'PLACE', cls: 'place', desc: 'Further Ado (#18)', detail: 'Insurance second-place hit', baseline: 8 },
-        { type: 'WIN', cls: 'win', desc: 'Commandment (#6)', detail: '7/1 · Cox / Saez · Cox stablemate · co-primary', baseline: 11 },
-        { type: 'WIN', cls: 'win', desc: 'Chief Wallabee (#12)', detail: '9-12/1 · B. Mott / Alvarado · best Mott in field', baseline: 12 },
-        { type: 'WIN', cls: 'win', desc: 'Golden Tempo (#19)', detail: '36/1 · DeVaux / J. Ortiz · live closer bomb', baseline: 6 },
+        { type: 'WIN', cls: 'win', desc: 'Further Ado (#18)', detail: '6/1 · Cox / Velazquez · Blue Grass winner · primary', baseline: 18 },
+        { type: 'PLACE', cls: 'place', desc: 'Further Ado (#18)', detail: 'Insurance second-place hit', baseline: 6 },
+        { type: 'WIN', cls: 'win', desc: 'Commandment (#6)', detail: '5/1 · Cox / Saez · Cox stablemate · co-primary', baseline: 10 },
+        { type: 'WIN', cls: 'win', desc: 'So Happy (#8)', detail: '5/1 · Glatt / M. Smith · tactical, Mike Smith on a wet track', baseline: 6 },
+        { type: 'WIN', cls: 'win', desc: 'Danon Bourbon (#7)', detail: '14/1 · Ikezoe / Nishimura · 2-for-2 on slop · top mud play', baseline: 8 },
+        { type: 'WIN', cls: 'win', desc: 'Chief Wallabee (#12)', detail: '6/1 · B. Mott / Alvarado · trimmed for mud question', baseline: 5 },
+        { type: 'WIN', cls: 'win', desc: 'Golden Tempo (#19)', detail: '36/1 · DeVaux / J. Ortiz · closer bomb', baseline: 3 },
       ]
     },
     {
       name: 'Exactas',
       bets: [
-        { type: 'EXACTA BOX', cls: 'exa', desc: '12, 18', detail: '2 combos × $1 base · the two best fits', baseline: 2, unit: 1, combos: 2 },
-        { type: 'EXACTA KEY', cls: 'exa', desc: '18 OVER 6, 8, 12, 15, 19', detail: '5 combos × $2 base · Further Ado wins (Puma off)', baseline: 10, unit: 2, combos: 5 },
-        { type: 'EXACTA KEY', cls: 'exa', desc: '12 OVER 6, 8, 15, 18, 19', detail: '5 combos × $2 base · Chief Wallabee wins (Puma off)', baseline: 10, unit: 2, combos: 5 },
-        { type: 'EXACTA KEY', cls: 'exa', desc: '19 OVER 6, 12, 18', detail: '3 combos × $1 base · closer wins', baseline: 3, unit: 1, combos: 3 },
-        { type: 'EXACTA KEY', cls: 'exa', desc: '6, 12, 18 OVER 19', detail: '3 combos × $1 base · closer noses 2nd', baseline: 3, unit: 1, combos: 3 },
-        { type: 'EXACTA KEY', cls: 'exa', desc: '1 OVER 12, 18', detail: '2 combos × $2 base · Renegade gate-to-wire insurance', baseline: 4, unit: 2, combos: 2 },
-        { type: 'EXACTA KEY', cls: 'exa', desc: '12, 18 OVER 1', detail: '2 combos × $2 base · Renegade tires to 2nd', baseline: 4, unit: 2, combos: 2 },
+        { type: 'EXACTA BOX', cls: 'exa', desc: '6, 18', detail: '2 combos × $1 base · Cox barn double', baseline: 2, unit: 1, combos: 2 },
+        { type: 'EXACTA KEY', cls: 'exa', desc: '18 OVER 1, 6, 7, 8, 12, 15, 19', detail: '7 combos × $1 base · Further Ado wins', baseline: 7, unit: 1, combos: 7 },
+        { type: 'EXACTA KEY', cls: 'exa', desc: '6 OVER 1, 7, 8, 12, 18, 19', detail: '6 combos × $1 base · Commandment wins', baseline: 6, unit: 1, combos: 6 },
+        { type: 'EXACTA KEY', cls: 'exa', desc: '7 OVER 6, 8, 18', detail: '3 combos × $1 base · Danon Bourbon mud bomb wins', baseline: 3, unit: 1, combos: 3 },
+        { type: 'EXACTA KEY', cls: 'exa', desc: '1 OVER 6, 8, 12, 18', detail: '4 combos × $2 base · Renegade gate-to-wire (slop helps)', baseline: 8, unit: 2, combos: 4 },
+        { type: 'EXACTA KEY', cls: 'exa', desc: '6, 8, 12, 18 OVER 1', detail: '4 combos × $1 base · Renegade tires to 2nd', baseline: 4, unit: 1, combos: 4 },
       ]
     },
     {
       name: 'Trifectas',
       bets: [
-        { type: 'TRIFECTA KEY', cls: 'tri', desc: '18 / 6, 8, 12 / 1, 6, 8, 12, 15, 19', detail: '15 combos × $0.50 base · Further Ado wins (Puma off)', baseline: 7.50, unit: 0.50, combos: 15 },
-        { type: 'TRIFECTA KEY', cls: 'tri', desc: '12 / 6, 8, 18 / 1, 6, 8, 15, 18, 19', detail: '15 combos × $0.50 base · Chief Wallabee wins (Puma off)', baseline: 7.50, unit: 0.50, combos: 15 },
-        { type: 'TRIFECTA KEY', cls: 'tri', desc: '19 / 12, 18 / 1, 6, 8, 12, 15, 18', detail: '10 combos × $0.50 base · longshot bomb', baseline: 5, unit: 0.50, combos: 10 },
+        { type: 'TRIFECTA KEY', cls: 'tri', desc: '18 / 1, 6, 7, 8, 12 / 1, 6, 7, 8, 12, 15, 19', detail: '30 combos × $0.50 base · Further Ado wins', baseline: 15, unit: 0.50, combos: 30 },
+        { type: 'TRIFECTA KEY', cls: 'tri', desc: '6 / 1, 7, 8, 18 / 1, 7, 8, 12, 18, 19', detail: '20 combos × $0.50 base · Commandment wins', baseline: 10, unit: 0.50, combos: 20 },
+        { type: 'TRIFECTA KEY', cls: 'tri', desc: '1 / 6, 18 / 6, 7, 8, 12, 18', detail: '8 combos × $0.50 base · Renegade gate-to-wire in slop', baseline: 4, unit: 0.50, combos: 8 },
       ]
     },
   ],
